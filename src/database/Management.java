@@ -25,7 +25,7 @@ public final class Management {
      */
     public static void annualChangesManagement(final String testId,
                                                final Database database)
-                                                throws JsonProcessingException {
+            throws JsonProcessingException {
         AnnualChildren memory = new AnnualChildren();
 
         eliminateYoungAdults(database.getInitialData().getChildrenList());
@@ -135,7 +135,7 @@ public final class Management {
      * budget with
      */
     private static void allocateBudget(final ArrayList<Child> currentKidsList,
-                                      final Double santaBudget) {
+                                       final Double santaBudget) {
         Double averageSum = 0.0;
 
         for (Child child : currentKidsList) {
@@ -159,7 +159,7 @@ public final class Management {
      * it is permitted by the personal budget and santa's gift list
      */
     private static void giveGifts(final ArrayList<Child> kidsList,
-                                 final ArrayList<Gift> currentGifts) {
+                                  final ArrayList<Gift> currentGifts) {
         for (Child child : kidsList) {
             int sizeChildCateg = child.getGiftsPreferences().size();
             Double kidBudget = child.getAssignedBudget();
@@ -194,7 +194,7 @@ public final class Management {
      * Method which mainly add new kids each year to the database
      */
     private static void addNewKids(final ArrayList<Child> originalKids,
-                                  final ArrayList<Child> newKids) {
+                                   final ArrayList<Child> newKids) {
         originalKids.addAll(newKids);
     }
 
@@ -203,7 +203,7 @@ public final class Management {
      * (It will also sort according to the price tag in ascending order)
      */
     private static void addNewGifts(final ArrayList<Gift> newGifts,
-                                   final ArrayList<Gift> originalGifts) {
+                                    final ArrayList<Gift> originalGifts) {
         ArrayList<Gift> uniqueNewGifts = new ArrayList<>();
 
         for (Gift gift : newGifts) {
@@ -226,7 +226,7 @@ public final class Management {
      * add new gift preferences to their old list
      */
     private static void updateKidsData(final ArrayList<Child> kidsList,
-                                      final ArrayList<ChildUpdate> kidsUpdates) {
+                                       final ArrayList<ChildUpdate> kidsUpdates) {
         for (ChildUpdate kidsUpdate : kidsUpdates) {
             int idToSearch = kidsUpdate.getChildId();
 

@@ -1,5 +1,6 @@
 package database;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +8,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 import common.Constants;
-import lombok.SneakyThrows;
 
 /**
  * Class designed to handle the flux of inputted data
@@ -26,7 +27,8 @@ public class Service {
      * forwarding the data to be altered with the anual updates
      */
     public void dataManagement(final String testId,
-                               final String testPath) throws JsonProcessingException {
+                               final String testPath) throws JsonProcessingException,
+            FileNotFoundException, JsonSyntaxException {
         Database database = Database.getInstance();
         insertData(testPath, database);
         Management.annualChangesManagement(testId, database);
@@ -36,8 +38,10 @@ public class Service {
      * Main Method redirecting the insertion of the given information
      * to the database, where all the changes will take place
      */
-    @SneakyThrows
-    private void insertData(final String testPath, final Database database) {
+    private void insertData(final String testPath,
+                            final Database database)
+            throws FileNotFoundException, JsonSyntaxException {
+
         JsonObject fileObject = (JsonObject) new JsonParser().parse(new FileReader(testPath));
 
         int numberOfYears = fileObject.get(Constants.NUMBER_OF_YEARS).getAsInt();

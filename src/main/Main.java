@@ -2,9 +2,11 @@ package main;
 
 import checker.Checker;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.JsonSyntaxException;
 import common.Constants;
 import database.Service;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,12 +23,8 @@ public final class Main {
      * @param args
      *          the arguments used to call the main method
      */
-    public static void main(final String[] args) throws JsonProcessingException {
-        File theDir = new File("output");
-        if (!theDir.exists()) {
-            theDir.mkdirs();
-        }
-
+    public static void main(final String[] args) throws JsonProcessingException,
+            FileNotFoundException, JsonSyntaxException {
         File dir = new File("tests");
         File[] directoryListing = dir.listFiles();
 
