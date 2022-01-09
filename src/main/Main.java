@@ -22,6 +22,30 @@ public final class Main {
      *          the arguments used to call the main method
      */
     public static void main(final String[] args) throws JsonProcessingException {
+        File theDir = new File("output");
+        if (!theDir.exists()) {
+            theDir.mkdirs();
+        }
+
+        File dir = new File("tests");
+        File[] directoryListing = dir.listFiles();
+
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                Pattern p = Pattern.compile(Constants.FILE_NAME_PATTERN);
+                Matcher m = p.matcher(child.getName());
+
+                String numberExt = "";
+                if (m.find()) {
+                    numberExt = m.group(1);
+                }
+
+                Service input = new Service();
+                String filePath = child.getPath();
+
+                input.dataManagement(numberExt, filePath);
+            }
+        }
 
         Checker.calculateScore();
     }
